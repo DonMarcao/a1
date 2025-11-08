@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Weapons - ABI Insight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <style>
+        .weapon-detail-section {
+            padding: 3rem 1rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .weapon-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .weapon-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 2px solid #28a745;
+        }
+
+        .weapon-title-block h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .weapon-category {
+            color: #28a745;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #252525 0%, #1f1f1f 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #28a745;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-bar {
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #34ce57 100%);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .weapon-description {
+            background: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 1.5rem 0;
+        }
+
+        .weapon-description p {
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .specs-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .specs-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-name {
+            color: #b0b0b0;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .spec-value {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .attachments-section {
+            margin-top: 2rem;
+        }
+
+        .attachment-card {
+            background: linear-gradient(145deg, #252525 0%, #1f1f1f 100%);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #2a2a2a;
+            margin-bottom: 1rem;
+        }
+
+        .attachment-card h4 {
+            color: #28a745;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .attachment-card p {
+            color: #b0b0b0;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem 1rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #4a4a4a;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(145deg, #28a745 0%, #34ce57 100%);
+            border-color: #28a745;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .weapon-detail-section {
+                padding: 3rem 2rem;
+            }
+
+            .weapon-icon {
+                width: 120px;
+                height: 120px;
+                font-size: 4rem;
+            }
+
+            .weapon-title-block h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .weapon-detail-section {
+                padding: 4rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-icon">▶</span> ABI INSIGHT
+            </a>
+            <div class="nav-icons">
+                <button class="btn-icon" id="hamburger-menu">
+                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 15.5v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0zm8-10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm12 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        <path d="M8 13a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="height: 40vh;">
+        <div class="hero-content">
+            <h1 class="hero-title">BEST WEAPONS</h1>
+            <p class="hero-subtitle">ARSENAL BREAKDOWN & STATS</p>
+        </div>
+    </section>
+
+    <a href="index.html" class="icon-btn-home" title="Back to Home">
+        <svg viewBox="0 0 16 16">
+            <path d="M0 15.5v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0zm8-10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm12 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            <path d="M8 13a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"/>
+        </svg>
+    </a>
+
+    <!-- Weapon 1: RAMPAGE LMG -->
+    <section class="weapon-detail-section" id="rampage-lmg">
+        <div class="weapon-header">
+            <div class="weapon-icon">🔫</div>
+            <div class="weapon-title-block">
+                <span class="badge-tier">TIER 6</span>
+                <h2>RAMPAGE LMG</h2>
+                <p class="weapon-category">Light Machine Gun</p>
+            </div>
+        </div>
+
+        <div class="weapon-description">
+            <p>The Rampage LMG is the pinnacle of suppressive firepower in Arena Breakout Infinite. With its devastating high-capacity magazine and exceptional sustained fire capability, this weapon excels at controlling chokepoints and providing cover fire for your squad. While mobility is sacrificed, the raw stopping power and ammunition capacity make it the ultimate choice for defensive positions and team support roles.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Performance Stats</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Damage</div>
+                <div class="stat-value">92</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 92%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Fire Rate</div>
+                <div class="stat-value">78</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 78%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Accuracy</div>
+                <div class="stat-value">75</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Range</div>
+                <div class="stat-value">85</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Recoil Control</div>
+                <div class="stat-value">65</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 65%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Mobility</div>
+                <div class="stat-value">45</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 45%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Specifications</h3>
+        <ul class="specs-list">
+            <li><span class="spec-name">Magazine Capacity</span> <span class="spec-value">150 rounds</span></li>
+            <li><span class="spec-name">Caliber</span> <span class="spec-value">7.62x51mm NATO</span></li>
+            <li><span class="spec-name">Fire Mode</span> <span class="spec-value">Full Auto</span></li>
+            <li><span class="spec-name">Effective Range</span> <span class="spec-value">600m</span></li>
+            <li><span class="spec-name">RPM (Rounds Per Minute)</span> <span class="spec-value">650</span></li>
+            <li><span class="spec-name">Reload Time</span> <span class="spec-value">6.5 seconds</span></li>
+        </ul>
+
+        <div class="attachments-section">
+            <h3 class="section-title">Recommended Attachments</h3>
+            <div class="attachment-card">
+                <h4>Muzzle: Heavy Compensator</h4>
+                <p>Reduces vertical recoil by 25%, essential for maintaining accuracy during sustained fire.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Optic: Holographic Sight</h4>
+                <p>Wide field of view for tracking multiple targets in suppressive fire scenarios.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Grip: Vertical Foregrip</h4>
+                <p>Improves recoil control and allows for more stable hip-fire when needed.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Stock: Heavy Stock</h4>
+                <p>Additional stability for long-range engagements, though it reduces mobility further.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weapon 2: M4A1 CARBINE -->
+    <section class="weapon-detail-section" id="m4a1-carbine">
+        <div class="weapon-header">
+            <div class="weapon-icon">🔫</div>
+            <div class="weapon-title-block">
+                <span class="badge-tier">TIER 5</span>
+                <h2>M4A1 CARBINE</h2>
+                <p class="weapon-category">Assault Rifle</p>
+            </div>
+        </div>
+
+        <div class="weapon-description">
+            <p>The M4A1 Carbine is the quintessential all-rounder in Arena Breakout Infinite. Trusted by operators worldwide, this weapon offers exceptional versatility across all engagement distances. Its balanced stats, manageable recoil, and extensive customization options make it the go-to choice for players who value adaptability. Whether you're clearing buildings or engaging at medium range, the M4A1 delivers consistent, reliable performance.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Performance Stats</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Damage</div>
+                <div class="stat-value">82</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 82%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Fire Rate</div>
+                <div class="stat-value">85</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Accuracy</div>
+                <div class="stat-value">88</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 88%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Range</div>
+                <div class="stat-value">80</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 80%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Recoil Control</div>
+                <div class="stat-value">85</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Mobility</div>
+                <div class="stat-value">78</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 78%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Specifications</h3>
+        <ul class="specs-list">
+            <li><span class="spec-name">Magazine Capacity</span> <span class="spec-value">30 rounds (60 extended)</span></li>
+            <li><span class="spec-name">Caliber</span> <span class="spec-value">5.56x45mm NATO</span></li>
+            <li><span class="spec-name">Fire Mode</span> <span class="spec-value">Semi-Auto / Full Auto</span></li>
+            <li><span class="spec-name">Effective Range</span> <span class="spec-value">500m</span></li>
+            <li><span class="spec-name">RPM (Rounds Per Minute)</span> <span class="spec-value">800</span></li>
+            <li><span class="spec-name">Reload Time</span> <span class="spec-value">2.8 seconds</span></li>
+        </ul>
+
+        <div class="attachments-section">
+            <h3 class="section-title">Recommended Attachments</h3>
+            <div class="attachment-card">
+                <h4>Muzzle: Suppressor</h4>
+                <p>Reduces noise signature and eliminates muzzle flash for stealthy operations.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Optic: Red Dot Sight</h4>
+                <p>Fast target acquisition with minimal obstruction for close to medium range combat.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Grip: Angled Foregrip</h4>
+                <p>Balances recoil reduction with maintained mobility and quick handling.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Magazine: 60-Round Extended</h4>
+                <p>Double the standard capacity for extended engagements without reload vulnerability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weapon 3: AKM RIFLE -->
+    <section class="weapon-detail-section" id="akm-rifle">
+        <div class="weapon-header">
+            <div class="weapon-icon">🔫</div>
+            <div class="weapon-title-block">
+                <span class="badge-tier">TIER 4</span>
+                <h2>AKM RIFLE</h2>
+                <p class="weapon-category">Assault Rifle</p>
+            </div>
+        </div>
+
+        <div class="weapon-description">
+            <p>The legendary AKM brings raw, uncompromising power to every firefight. Known for its exceptional damage per shot and renowned reliability, this classic rifle can punch through armor with devastating effectiveness. While the recoil is more challenging to manage than modern alternatives, skilled operators who master the AKM's kick will be rewarded with one of the highest damage outputs in its class. Perfect for aggressive pushes and armor-heavy encounters.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Performance Stats</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Damage</div>
+                <div class="stat-value">95</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 95%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Fire Rate</div>
+                <div class="stat-value">72</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 72%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Accuracy</div>
+                <div class="stat-value">70</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Range</div>
+                <div class="stat-value">75</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Recoil Control</div>
+                <div class="stat-value">58</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 58%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Mobility</div>
+                <div class="stat-value">70</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 70%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Specifications</h3>
+        <ul class="specs-list">
+            <li><span class="spec-name">Magazine Capacity</span> <span class="spec-value">30 rounds (75 drum)</span></li>
+            <li><span class="spec-name">Caliber</span> <span class="spec-value">7.62x39mm</span></li>
+            <li><span class="spec-name">Fire Mode</span> <span class="spec-value">Semi-Auto / Full Auto</span></li>
+            <li><span class="spec-name">Effective Range</span> <span class="spec-value">400m</span></li>
+            <li><span class="spec-name">RPM (Rounds Per Minute)</span> <span class="spec-value">600</span></li>
+            <li><span class="spec-name">Reload Time</span> <span class="spec-value">3.2 seconds</span></li>
+        </ul>
+
+        <div class="attachments-section">
+            <h3 class="section-title">Recommended Attachments</h3>
+            <div class="attachment-card">
+                <h4>Muzzle: Muzzle Brake</h4>
+                <p>Critical for taming the AKM's aggressive recoil pattern, especially during full-auto fire.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Optic: 2x Magnified Scope</h4>
+                <p>Extends effective engagement range while maintaining close-quarters capability.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Stock: Polymer Stock</h4>
+                <p>Modernizes the classic design with improved ergonomics and recoil management.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Magazine: 75-Round Drum</h4>
+                <p>Massive firepower for prolonged engagements, though reload time significantly increases.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weapon 4: MP5 SMG -->
+    <section class="weapon-detail-section" id="mp5-smg">
+        <div class="weapon-header">
+            <div class="weapon-icon">🔫</div>
+            <div class="weapon-title-block">
+                <span class="badge-tier">TIER 3</span>
+                <h2>MP5 SMG</h2>
+                <p class="weapon-category">Submachine Gun</p>
+            </div>
+        </div>
+
+        <div class="weapon-description">
+            <p>The MP5 is the ultimate close-quarters combat weapon in Arena Breakout Infinite. With its blistering rate of fire, minimal recoil, and exceptional handling characteristics, this SMG dominates indoor environments and tight spaces. While it lacks the range and penetration of assault rifles, the MP5's speed and agility make it the weapon of choice for aggressive entry tactics, rapid building clears, and high-speed engagement scenarios where mobility is paramount.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Performance Stats</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Damage</div>
+                <div class="stat-value">68</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 68%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Fire Rate</div>
+                <div class="stat-value">95</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 95%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Accuracy</div>
+                <div class="stat-value">82</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 82%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Range</div>
+                <div class="stat-value">55</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 55%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Recoil Control</div>
+                <div class="stat-value">90</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Mobility</div>
+                <div class="stat-value">92</div>
+                <div class="stat-bar">
+                    <div class="stat-bar-fill" style="width: 92%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Specifications</h3>
+        <ul class="specs-list">
+            <li><span class="spec-name">Magazine Capacity</span> <span class="spec-value">30 rounds (50 extended)</span></li>
+            <li><span class="spec-name">Caliber</span> <span class="spec-value">9x19mm Parabellum</span></li>
+            <li><span class="spec-name">Fire Mode</span> <span class="spec-value">Semi-Auto / Full Auto / 3-Round Burst</span></li>
+            <li><span class="spec-name">Effective Range</span> <span class="spec-value">150m</span></li>
+            <li><span class="spec-name">RPM (Rounds Per Minute)</span> <span class="spec-value">900</span></li>
+            <li><span class="spec-name">Reload Time</span> <span class="spec-value">2.2 seconds</span></li>
+        </ul>
+
+        <div class="attachments-section">
+            <h3 class="section-title">Recommended Attachments</h3>
+            <div class="attachment-card">
+                <h4>Muzzle: Integrated Suppressor</h4>
+                <p>Maintains the MP5's compact profile while providing stealth advantages in CQB.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Optic: Reflex Sight</h4>
+                <p>Minimal and fast, perfect for the MP5's intended engagement distances.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Stock: Collapsed Stock</h4>
+                <p>Maximizes mobility and sprint-to-fire speed for aggressive playstyles.</p>
+            </div>
+            <div class="attachment-card">
+                <h4>Laser: Green Laser Sight</h4>
+                <p>Improves hip-fire accuracy for those critical point-blank encounters.</p>
+            </div>
+        </div>
+    </section>
+
+    <a href="index.html" class="icon-btn-home" title="Back to Home">
+        <svg viewBox="0 0 16 16">
+            <path d="M0 15.5v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0zm8-10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm12 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            <path d="M8 13a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"/>
+        </svg>
+    </a>
+
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-title">MENU</div>
+            <button class="mobile-menu-close" id="menu-close">×</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <a href="index.html">Home</a>
+            <a href="best-weapons.html" class="active">Best Weapons</a>
+            <a href="tactical-gear.html">Tactical Gear</a>
+            <a href="extraction-maps.html">Extraction Maps</a>
+            <a href="latest-intel.html">Latest Intel</a>
+            <a href="media-gallery.html">Media Gallery</a>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hamburger menu functionality
+        const hamburgerBtn = document.getElementById('hamburger-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuClose = document.getElementById('menu-close');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>

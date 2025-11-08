@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extraction Maps - ABI Insight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <style>
+        .map-detail-section {
+            padding: 3rem 1rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .map-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .map-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #1a3a1a 0%, #2a4a2a 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 2px solid #28a745;
+        }
+
+        .map-title-block h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .map-category {
+            color: #28a745;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .map-description {
+            background: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 1.5rem 0;
+        }
+
+        .map-description p {
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #252525 0%, #1f1f1f 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #28a745;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+        }
+
+        .feature-card h4 {
+            color: #28a745;
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-card li {
+            padding: 0.5rem 0;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .feature-card li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-card li::before {
+            content: "▶";
+            color: #28a745;
+            margin-right: 0.5rem;
+            font-size: 0.7rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem 1rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #4a4a4a;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(145deg, #28a745 0%, #34ce57 100%);
+            border-color: #28a745;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .map-detail-section {
+                padding: 3rem 2rem;
+            }
+
+            .map-title-block h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .map-detail-section {
+                padding: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-icon">▶</span> ABI INSIGHT
+            </a>
+            <div class="nav-icons">
+                <button class="btn-icon" id="hamburger-menu">
+                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 15.5v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0zm8-10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm12 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        <path d="M8 13a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="height: 40vh;">
+        <div class="hero-content">
+            <h1 class="hero-title">EXTRACTION MAPS</h1>
+            <p class="hero-subtitle">TACTICAL GUIDES & STRATEGIES</p>
+        </div>
+    </section>
+
+    <a href="index.html" class="icon-btn-home" title="Back to Home">
+        <svg viewBox="0 0 16 16">
+            <path d="M0 15.5v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0zm8-10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm12 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            <path d="M8 13a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"/>
+        </svg>
+    </a>
+
+    <!-- Map 1: FARM -->
+    <section class="map-detail-section" id="farm">
+        <div class="map-header">
+            <div class="map-icon">🗺️</div>
+            <div class="map-title-block">
+                <span class="badge-new">NEW</span>
+                <h2>FARM - EXTRACTION GUIDE</h2>
+                <p class="map-category">Medium-Sized Map</p>
+            </div>
+        </div>
+
+        <div class="map-description">
+            <p>Farm is a versatile medium-sized map featuring agricultural buildings, open fields, and dense tree lines. This map offers multiple playstyles, from long-range engagements across crop fields to close-quarters combat in barn complexes. Success on Farm requires balancing aggression with caution, as visibility varies dramatically between open areas and covered positions.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Key Features</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>Extraction Points</h4>
+                <ul>
+                    <li>North Farm Gate (always available)</li>
+                    <li>South Bridge (timer-based)</li>
+                    <li>East Fence Line (conditional)</li>
+                    <li>West Forest Path (secure)</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>High-Value Loot Spots</h4>
+                <ul>
+                    <li>Main Farmhouse - weapons cache</li>
+                    <li>Grain Silo - medical supplies</li>
+                    <li>Equipment Shed - attachments</li>
+                    <li>Underground Bunker - rare items</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>Danger Zones</h4>
+                <ul>
+                    <li>Open crop fields - sniper exposure</li>
+                    <li>Main barn complex - hotly contested</li>
+                    <li>Central road - high traffic</li>
+                    <li>Boss spawn area - extreme danger</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map 2: VALLEY -->
+    <section class="map-detail-section" id="valley">
+        <div class="map-header">
+            <div class="map-icon">🏔️</div>
+            <div class="map-title-block">
+                <h2>VALLEY - TACTICAL GUIDE</h2>
+                <p class="map-category">Large Map</p>
+            </div>
+        </div>
+
+        <div class="map-description">
+            <p>Valley is an expansive map characterized by elevation changes, river systems, and scattered industrial complexes. The terrain heavily favors players who understand positioning and long-range engagements. Navigation requires careful route planning as moving between zones often exposes you to multiple sightlines. Master the high ground, and you'll control the valley.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Key Features</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>Extraction Points</h4>
+                <ul>
+                    <li>Hillside Extraction (elevation required)</li>
+                    <li>River Crossing (water route)</li>
+                    <li>Mountain Pass (secure but distant)</li>
+                    <li>Vehicle Extraction (keys needed)</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>High-Value Loot Spots</h4>
+                <ul>
+                    <li>Sawmill Complex - industrial loot</li>
+                    <li>Radio Tower - military gear</li>
+                    <li>Riverside Compound - varied loot</li>
+                    <li>Crashed Helicopter - high-tier</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>Tactical Positions</h4>
+                <ul>
+                    <li>Observation Ridge - best overview</li>
+                    <li>Bridge Overwatch - choke point</li>
+                    <li>Forest Treeline - concealment</li>
+                    <li>Rocky Outcrops - cover positions</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map 3: ARMORY -->
+    <section class="map-detail-section" id="armory">
+        <div class="map-header">
+            <div class="map-icon">🏭</div>
+            <div class="map-title-block">
+                <h2>ARMORY - HOT ZONES</h2>
+                <p class="map-category">Small Map - High Risk</p>
+            </div>
+        </div>
+
+        <div class="map-description">
+            <p>Armory is a compact, high-intensity map centered around a military storage facility. Every inch of this map is potentially hostile, with tight corridors, multi-level buildings, and countless ambush points. The loot quality is exceptional, but expect constant combat. Quick reflexes and aggressive tactics are rewarded, while hesitation is punished.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Key Features</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>Extraction Points</h4>
+                <ul>
+                    <li>Main Gate (heavily contested)</li>
+                    <li>Drainage Tunnel (underground)</li>
+                    <li>Roof Helipad (requires access)</li>
+                    <li>Breach Point (tactical exit)</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>High-Value Loot Spots</h4>
+                <ul>
+                    <li>Weapons Vault - top-tier weapons</li>
+                    <li>Officers' Quarters - rare keys</li>
+                    <li>Supply Room - attachments/mods</li>
+                    <li>Command Center - intelligence</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>Combat Zones</h4>
+                <ul>
+                    <li>Central Courtyard - deadly crossfire</li>
+                    <li>Main Building - CQB hell</li>
+                    <li>Perimeter Walls - sniper positions</li>
+                    <li>Underground - maze-like corridors</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map 4: NORTHRIDGE -->
+    <section class="map-detail-section" id="northridge">
+        <div class="map-header">
+            <div class="map-icon">🏘️</div>
+            <div class="map-title-block">
+                <h2>NORTHRIDGE - ROUTES</h2>
+                <p class="map-category">Urban Map</p>
+            </div>
+        </div>
+
+        <div class="map-description">
+            <p>Northridge is an urban warfare environment featuring residential blocks, commercial centers, and underground metro systems. The map's complexity comes from its verticality and interconnected buildings. Rooftop access, window positions, and interior navigation create a three-dimensional battlefield where threats can come from any angle. Knowledge of optimal routes is essential for survival and successful extraction.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 2rem;">Key Features</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>Extraction Points</h4>
+                <ul>
+                    <li>Metro Station (underground route)</li>
+                    <li>Rooftop Evacuation (vertical)</li>
+                    <li>Street Checkpoint (patrolled)</li>
+                    <li>Parking Garage (vehicle)</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>High-Value Loot Spots</h4>
+                <ul>
+                    <li>Bank Vault - cash & valuables</li>
+                    <li>Police Station - tactical gear</li>
+                    <li>Hospital - medical supplies</li>
+                    <li>Electronics Store - tech loot</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>Safe Routes</h4>
+                <ul>
+                    <li>Alleyway Network - covered movement</li>
+                    <li>Sewer System - underground travel</li>
+                    <li>Rooftop Pathway - elevated route</li>
+                    <li>Building Interiors - avoid streets</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-title">MENU</div>
+            <button class="mobile-menu-close" id="menu-close">×</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <a href="index.html">Home</a>
+            <a href="best-weapons.html">Best Weapons</a>
+            <a href="tactical-gear.html">Tactical Gear</a>
+            <a href="extraction-maps.html" class="active">Extraction Maps</a>
+            <a href="latest-intel.html">Latest Intel</a>
+            <a href="media-gallery.html">Media Gallery</a>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hamburger menu functionality
+        const hamburgerBtn = document.getElementById('hamburger-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuClose = document.getElementById('menu-close');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>

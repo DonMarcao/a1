@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Intel - ABI Insight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <style>
+        .intel-article-section {
+            padding: 3rem 1rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .article-header {
+            margin-bottom: 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .article-date {
+            color: #28a745;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .article-category {
+            background: linear-gradient(90deg, #28a745 0%, #34ce57 100%);
+            color: #ffffff;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .article-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .article-content {
+            background: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 1.5rem 0;
+        }
+
+        .article-content p {
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .article-content h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content li {
+            padding: 0.7rem 0;
+            color: #b0b0b0;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .article-content li::before {
+            content: "▶";
+            color: #28a745;
+            margin-right: 0.7rem;
+            font-size: 0.8rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(145deg, #2a2a2a 0%, #1f1f1f 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #28a745;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h4 {
+            color: #28a745;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem 1rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #4a4a4a;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(145deg, #28a745 0%, #34ce57 100%);
+            border-color: #28a745;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .intel-article-section {
+                padding: 3rem 2rem;
+            }
+
+            .article-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .intel-article-section {
+                padding: 4rem;
+            }
+
+            .article-content {
+                padding: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-icon">▶</span> ABI INSIGHT
+            </a>
+            <div class="nav-icons">
+                <button class="btn-icon" id="hamburger-menu">
+                    <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 15.5v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0zm8-10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm12 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        <path d="M8 13a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="height: 40vh;">
+        <div class="hero-content">
+            <h1 class="hero-title">LATEST INTEL</h1>
+            <p class="hero-subtitle">NEWS, UPDATES & STRATEGIES</p>
+        </div>
+    </section>
+
+    <a href="index.html" class="icon-btn-home" title="Back to Home">
+        <svg viewBox="0 0 16 16">
+            <path d="M0 15.5v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2H0zm8-10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm12 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            <path d="M8 13a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"/>
+        </svg>
+    </a>
+
+    <!-- Article 1: Extraction Guide -->
+    <section class="intel-article-section">
+        <div class="article-header">
+            <div class="article-meta">
+                <span class="article-date">November 8, 2025</span>
+                <span class="article-category">Guide</span>
+            </div>
+            <h2>EXTRACTION GUIDE: MASTER YOUR EXFIL ROUTES</h2>
+        </div>
+
+        <div class="article-content">
+            <p>Successful extraction is the difference between profit and total loss in Arena Breakout Infinite. This comprehensive guide covers everything you need to know about extracting safely with your hard-earned loot.</p>
+
+            <h3>Core Extraction Principles</h3>
+            <ul>
+                <li>Always have a primary and backup extraction point planned before looting</li>
+                <li>Monitor the timer - most maps have time-dependent extraction points</li>
+                <li>Lighter loadouts move faster toward extraction zones</li>
+                <li>Some extractions require specific items or keys to access</li>
+                <li>The last 5 minutes of a raid are the most dangerous for extraction</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>Pro Tip: Exit Camping Counter-Strategy</h4>
+                <p style="color: #d0d0d0; margin: 0;">Never rush directly to extraction. Instead, approach from an unexpected angle, use grenades to clear common camping spots, and consider waiting 1-2 minutes before final approach to let other players draw out campers.</p>
+            </div>
+
+            <h3>Map-Specific Extraction Tips</h3>
+            <p>Each map has unique extraction mechanics that reward players who understand the nuances:</p>
+            <ul>
+                <li><strong>Farm:</strong> The North Gate is safest during the first 15 minutes of a raid</li>
+                <li><strong>Valley:</strong> Vehicle extraction requires finding car keys from specific loot spots</li>
+                <li><strong>Armory:</strong> Underground tunnel extraction is risky but rarely camped</li>
+                <li><strong>Northridge:</strong> Metro stations offer the fastest extraction but expect PvP</li>
+            </ul>
+
+            <p>Remember: the best extraction is one where you survive. Sometimes it's worth waiting an extra few minutes for a safer opportunity rather than rushing into a contested extraction point.</p>
+        </div>
+    </section>
+
+    <!-- Article 2: Update 2.0 -->
+    <section class="intel-article-section">
+        <div class="article-header">
+            <div class="article-meta">
+                <span class="article-date">November 5, 2025</span>
+                <span class="article-category">Update</span>
+            </div>
+            <h2>UPDATE 2.0: LATEST PATCH NOTES</h2>
+        </div>
+
+        <div class="article-content">
+            <p>Arena Breakout Infinite's major Update 2.0 brings significant changes to weapon balance, introduces a new map, and implements quality-of-life improvements that the community has been requesting.</p>
+
+            <h3>Major Changes</h3>
+            <ul>
+                <li>New Map: Industrial District - medium-sized urban combat zone</li>
+                <li>Weapon Rebalance: SMGs received accuracy buff, LMGs slightly reduced mobility</li>
+                <li>Armor System Overhaul: durability now affects protection percentage</li>
+                <li>New Extraction Mechanic: timed helicopter extractions on select maps</li>
+                <li>Trader Reputation System: unlock exclusive items through faction loyalty</li>
+            </ul>
+
+            <h3>Weapon Balance Highlights</h3>
+            <p>The weapon meta has shifted considerably with this update:</p>
+            <ul>
+                <li>M4A1: Reduced recoil by 8%, increased effective range</li>
+                <li>AKM: Damage increased from 92 to 95, but added horizontal recoil</li>
+                <li>MP5: Accuracy improved by 12%, making it viable at medium range</li>
+                <li>Rampage LMG: Movement speed while equipped reduced by 15%</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>Community Reaction</h4>
+                <p style="color: #d0d0d0; margin: 0;">Players are generally positive about Update 2.0, particularly praising the armor durability changes which add more strategic depth to gear selection. The new Industrial District map is already becoming a favorite for its balanced mix of CQB and mid-range engagements.</p>
+            </div>
+
+            <h3>Bug Fixes & Performance</h3>
+            <ul>
+                <li>Fixed invisible loot spawn issue on Valley map</li>
+                <li>Resolved audio bug causing delayed gunshot sounds</li>
+                <li>Improved server stability during peak hours</li>
+                <li>Optimized rendering for better FPS in dense combat areas</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Article 3: Group Tactics -->
+    <section class="intel-article-section">
+        <div class="article-header">
+            <div class="article-meta">
+                <span class="article-date">November 1, 2025</span>
+                <span class="article-category">Strategy</span>
+            </div>
+            <h2>GROUP TACTICS: TEAM STRATEGIES</h2>
+        </div>
+
+        <div class="article-content">
+            <p>Squad play in Arena Breakout Infinite requires coordination, communication, and clearly defined roles. A well-organized team will consistently outperform individual players, even if those players are more skilled.</p>
+
+            <h3>Essential Team Roles</h3>
+            <ul>
+                <li><strong>Point Man:</strong> Leads the squad, makes navigation decisions, equipped for close combat</li>
+                <li><strong>Support:</strong> Carries extra ammunition and medical supplies, provides covering fire</li>
+                <li><strong>Marksman:</strong> Hangs back, provides overwatch and long-range threat elimination</li>
+                <li><strong>Flex:</strong> Adapts to current needs, can fill any role as situation demands</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>Communication Protocol</h4>
+                <p style="color: #d0d0d0; margin: 0;">Use compass bearings for callouts (e.g., "Enemy at 270, 50 meters"). Keep comms clear during combat - only call essential information. Establish code words for common situations like "Contact" for enemy spotted, "Moving" when changing position, and "Reloading" when vulnerable.</p>
+            </div>
+
+            <h3>Advanced Squad Tactics</h3>
+            <ul>
+                <li><strong>Bounding Overwatch:</strong> Half the team moves while the other half provides cover</li>
+                <li><strong>Crossfire Setup:</strong> Position team to catch enemies between multiple angles</li>
+                <li><strong>Room Clearing:</strong> Use the "stack and clear" method for buildings</li>
+                <li><strong>Retreat Protocol:</strong> Establish fallback positions before engaging</li>
+            </ul>
+
+            <p>Remember to share loot fairly - a team that works together stays together. Priority should go to those who need upgrades most, not whoever grabs items first.</p>
+        </div>
+    </section>
+
+    <!-- Article 4: Meta Weapons -->
+    <section class="intel-article-section">
+        <div class="article-header">
+            <div class="article-meta">
+                <span class="article-date">October 28, 2025</span>
+                <span class="article-category">Loadouts</span>
+            </div>
+            <h2>META WEAPONS: TOP TIER LOADOUTS</h2>
+        </div>
+
+        <div class="article-content">
+            <p>The current meta favors versatility and reliability over raw damage output. Here are the loadouts dominating high-level play in the current season.</p>
+
+            <h3>Budget Loadout (50K Credits)</h3>
+            <ul>
+                <li>Primary: AKM with basic attachments (muzzle brake, foregrip)</li>
+                <li>Secondary: Glock 17 with extended magazine</li>
+                <li>Armor: Class 3 vest and helmet</li>
+                <li>Backpack: Standard 24-slot backpack</li>
+                <li>Meds: 2x bandages, 1x medkit, 1x painkiller</li>
+            </ul>
+
+            <h3>Balanced Loadout (150K Credits)</h3>
+            <ul>
+                <li>Primary: M4A1 Carbine fully modded (suppressor, red dot, vertical grip, 60-round mag)</li>
+                <li>Secondary: P226 with tactical flashlight</li>
+                <li>Armor: Class 5 tactical vest and helmet with face shield</li>
+                <li>Backpack: Tactical 36-slot backpack</li>
+                <li>Meds: 3x bandages, 2x medkits, 2x painkillers, 1x surgical kit</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>Investment Strategy</h4>
+                <p style="color: #d0d0d0; margin: 0;">The best cost-to-performance ratio comes from mid-tier loadouts around 100-150K credits. Going full budget often means dying to better-equipped players, while max-tier loadouts have diminishing returns and hurt more when you inevitably die.</p>
+            </div>
+
+            <h3>Chad Loadout (400K+ Credits)</h3>
+            <ul>
+                <li>Primary: Rampage LMG or heavily modded M4A1</li>
+                <li>Secondary: Full-auto machine pistol</li>
+                <li>Armor: Class 6 Heavy Armor, Class 6 helmet, Class 5 face shield</li>
+                <li>Backpack: Large 48-slot tactical backpack</li>
+                <li>Meds: Full medical suite including emergency surgery kits</li>
+                <li>Special: Night vision goggles, thermal scope option</li>
+            </ul>
+
+            <p>Choose your loadout based on your goals for the raid. High-value loot runs justify better gear, while quest runs can be done with budget kits to minimize risk.</p>
+        </div>
+    </section>
+
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-title">MENU</div>
+            <button class="mobile-menu-close" id="menu-close">×</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <a href="index.html">Home</a>
+            <a href="best-weapons.html">Best Weapons</a>
+            <a href="tactical-gear.html">Tactical Gear</a>
+            <a href="extraction-maps.html">Extraction Maps</a>
+            <a href="latest-intel.html" class="active">Latest Intel</a>
+            <a href="media-gallery.html">Media Gallery</a>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hamburger menu functionality
+        const hamburgerBtn = document.getElementById('hamburger-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuClose = document.getElementById('menu-close');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>

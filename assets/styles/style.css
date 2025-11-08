@@ -449,3 +449,142 @@ body {
         font-size: 1.8rem;
     }
 }
+
+/* Large Desktop Styles (1440px) */
+@media (min-width: 1440px) {
+    .content-section {
+        padding: 4rem 6rem;
+    }
+
+    .cards-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+    }
+
+    .card-horizontal {
+        min-width: 380px;
+        flex: 0 1 calc(50% - 1rem);
+        max-width: 500px;
+    }
+
+    .card-vertical {
+        flex: 0 1 calc(25% - 1rem);
+        min-width: 220px;
+        max-width: 280px;
+    }
+
+    .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Full HD Styles (1920px) */
+@media (min-width: 1920px) {
+    .content-section {
+        padding: 5rem 8rem;
+    }
+
+    .cards-container {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .card-horizontal {
+        flex: 0 1 calc(33.333% - 1.5rem);
+        max-width: 550px;
+    }
+
+    .card-vertical {
+        flex: 0 1 calc(25% - 1.5rem);
+        max-width: 300px;
+    }
+
+    .hero-title {
+        font-size: 5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* 2K/QHD Styles (2560px) */
+@media (min-width: 2560px) {
+    .content-section {
+        padding: 6rem 10rem;
+        max-width: 2400px;
+        margin: 0 auto;
+    }
+
+    .cards-container {
+        gap: 2rem;
+    }
+
+    .card-horizontal {
+        flex: 0 1 calc(33.333% - 2rem);
+        max-width: 600px;
+    }
+
+    .card-vertical {
+        flex: 0 1 calc(25% - 2rem);
+        max-width: 320px;
+    }
+
+    .hero-title {
+        font-size: 5.5rem;
+    }
+
+    .hero-content {
+        max-width: 1400px;
+    }
+}
+
+/* Ultrawide Styles (3440px+) */
+@media (min-width: 3440px) {
+    .content-section {
+        padding: 6rem 12rem;
+        max-width: 3000px;
+        margin: 0 auto;
+    }
+
+    .cards-container {
+        justify-content: space-evenly;
+        gap: 2.5rem;
+    }
+
+    .card-horizontal {
+        flex: 0 1 calc(25% - 2.5rem);
+        max-width: 650px;
+    }
+
+    .grid-cards .card-vertical {
+        flex: 0 1 calc(25% - 2.5rem);
+        max-width: 350px;
+    }
+
+    .hero-section {
+        height: 75vh;
+    }
+
+    .hero-title {
+        font-size: 6rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.6rem;
+    }
+
+    .hero-content {
+        max-width: 1600px;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
